@@ -19,7 +19,7 @@ ex:
 cenc-cli my_c_project gcc -c
 ```
 
-### Command Message
+### Command Help
 ```
 $ cenv-cli --help
 Usage: cenv-cli [OPTIONS] <PROJECT_NAME> <BUILD_TYPE>
