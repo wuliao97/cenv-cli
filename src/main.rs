@@ -124,11 +124,11 @@ impl BuildTools {
         Self::base_gen(&path, lang, git, readme).ok();
 
         match &self {
-            BuildTools::Gcc => Self::gcc_gen(path),
-            BuildTools::Gpp => Self::gpp_gen(path),
+            BuildTools::Gcc => Self::gcc_gen(path, lang),
+            BuildTools::Gpp => Self::gpp_gen(path, lang),
             BuildTools::CMake => Self::cmake_gen(path, p_name, lang),
-            BuildTools::Clang => Self::clang_gen(path),
-            BuildTools::Clangpp => Self::clangpp_gen(path),
+            BuildTools::Clang => Self::clang_gen(path, lang),
+            BuildTools::Clangpp => Self::clangpp_gen(path, lang),
         }
     }
 
@@ -169,8 +169,9 @@ impl BuildTools {
         Ok(())
     }
 
-    fn gcc_gen<P: AsRef<Path>>(path: P) -> Result<()> {
-        let buf = r"gcc -o main ./src/main.c && ./main";
+    fn gcc_gen<P: AsRef<Path>>(path: P, lang: &Language) -> Result<()> {
+        let ext = if lang == &Language::C { ".c" } else { ".cpp" };
+        let buf = format!("gcc -o main ./src/main{} && ./main", ext);
         let run_path = path.as_ref().join("run");
 
         let mut run = OpenOptions::new()
@@ -185,8 +186,9 @@ impl BuildTools {
         Ok(())
     }
 
-    fn gpp_gen<P: AsRef<Path>>(path: P) -> Result<()> {
-        let buf = r"g++ -o main ./src/main.c && ./main";
+    fn gpp_gen<P: AsRef<Path>>(path: P, lang: &Language) -> Result<()> {
+        let ext = if lang == &Language::C { ".c" } else { ".cpp" };
+        let buf = format!("g++ -o main ./src/main{} && ./main", ext);
         let run_path = path.as_ref().join("run");
 
         let mut run = OpenOptions::new()
@@ -226,10 +228,11 @@ impl BuildTools {
         Ok(())
     }
 
-    fn clang_gen<P: AsRef<Path>>(path: P) -> Result<()> {
-        let buf = r"clang -o main ./src/main.c && ./main";
-        let run_path = path.as_ref().join("run");
+    fn clang_gen<P: AsRef<Path>>(path: P, lang: &Language) -> Result<()> {
+        let ext = if lang == &Language::C { ".c" } else { ".cpp" };
+        let buf = format!("clang -o main ./src/main{} && ./main", ext);
 
+        let run_path = path.as_ref().join("run");
         let mut run = OpenOptions::new()
             .create(true)
             .write(true)
@@ -242,8 +245,9 @@ impl BuildTools {
         Ok(())
     }
 
-    fn clangpp_gen<P: AsRef<Path>>(path: P) -> Result<()> {
-        let buf = r"clang++ -o main ./src/main.c && ./main";
+    fn clangpp_gen<P: AsRef<Path>>(path: P, lang: &Language) -> Result<()> {
+        let ext = if lang == &Language::C { ".c" } else { ".cpp" };
+        let buf = format!("clang++ -o main ./src/main{} && ./main", ext);
         let run_path = path.as_ref().join("run");
 
         let mut run = OpenOptions::new()

@@ -2,9 +2,10 @@
 name = "cenv-cli"
 version = "0.1.0"
 edition = "2021"
-
+description = "This is a CLI-tool for generating a C/C++ project"
+readme = "readme.md"
 repository = "https://github.com/wuliao97/cenv-cli.git"
-
+license = "LICENSE"
 
 [[bin]]
 name = "cenv-cli"
