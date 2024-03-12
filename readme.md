@@ -1,5 +1,10 @@
 # C-env-CLI
 
+# Installation
+
+```
+cargo install cenv-cli
+```
 
 
 ## Usage

@@ -1,6 +1,6 @@
 [package]
 name = "cenv-cli"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "This is a CLI-tool for generating a C/C++ project"
 readme = "readme.md"
