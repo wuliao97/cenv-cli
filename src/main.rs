@@ -158,7 +158,7 @@ impl BuildTools {
             }
             // i didnt test this code 🙃
             let git_ign_path = path.as_ref().join(".gitignore"); 
-            File::create(git_ign_path).unwrap();            
+            File::create(git_ign_path).unwrap().write_all("build".as_bytes()).unwrap();            
         };
 
         if readme {
